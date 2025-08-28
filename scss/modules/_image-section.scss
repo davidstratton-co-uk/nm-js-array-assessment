@@ -1,0 +1,13 @@
+.image-select {
+    display: grid;
+    justify-items: center;
+    border: 1px solid #000;
+    padding: 1rem;
+    gap: 2rem;
+}
+
+.image-current {
+    img {
+        width: 100%;
+    }
+}

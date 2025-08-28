@@ -1,0 +1,7 @@
+@use '../helpers/media-query' as mq;
+
+main {
+    display: grid;
+    justify-content: center;
+    padding: 1rem .5rem;
+}

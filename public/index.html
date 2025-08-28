@@ -7,8 +7,54 @@
     <title>Javascript Array Assessment | David Stratton</title>
 </head>
 <body>
-
-    
+    <div class="site-container">
+        <header class="site-header">
+            <div class="site-logo">
+                <h1>DS</h1>
+            </div>
+            <div>
+                <h2>Viewing Image Collection of <span class="user">Guest User</span></h2>
+            </div>
+            <div class="header-buttons">
+                <button>New User</button>
+                <button>Switch User</button>
+            </div>
+        </header>
+        <main>
+            <section>
+                <div class="image-select">
+                    <div class="image-current">
+                        <!-- <span class="loader"></span> -->
+                        <img src="https://picsum.photos/1200/800.webp" alt="">
+                    </div>
+                    <div class="image-controls">
+                        <button type="button">Add Image to List</button>
+                        <button type="button">New Random Image</button>
+                    </div>
+                </div>
+            </section>
+            <section>
+                <div class="collection-container">
+                    <h3><span>User's</span> Collection:</h3>
+                    <div class="collection-view">
+                        <ul class="collection-list">
+                            <li class="collection-item">
+                                <img src="https://picsum.photos/id/47/1200/800.webp">
+                                <div class="item-remove"><i>X</i></div>
+                            </li>
+                            <li class="collection-item">
+                                <img src="https://picsum.photos/id/723/1200/800.webp">
+                                <div class="item-remove"><i>X</i></div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+        </main>
+        <footer class="site-footer">
+            <p>Javascript Array Assessment by <a href="https://david-stratton.netmatters-scs.co.uk">David Stratton</a></p>
+        </footer>
+    </div>    
 <script src="./assets/scripts/main.js"></script>
 </body>
 </html>

@@ -1,0 +1,36 @@
+@use '../helpers/media-query' as mq;
+
+.collection-container {
+    display: grid;
+    gap: 1rem;
+    padding: 1.5rem 1rem;
+}
+
+.collection-view {
+    display: grid;
+    justify-items: center;
+
+    img {
+        width: 100%;
+    }
+}
+
+.collection-list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.collection-item {
+    display: grid;
+    grid-template-columns: 1fr min-content;
+    border: 1px solid #000000;
+}
+
+.item-remove {
+    background-color: plum;
+    padding: .5rem;
+    align-content: center;
+    border-left: 1px solid grey;
+}

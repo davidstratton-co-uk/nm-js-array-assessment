@@ -1,2 +1,12 @@
 @use '../helpers/media-query' as mq;
 
+.site-container {
+    display: grid;
+    grid-template-rows: max-content 1fr max-content;
+    min-height: 100dvh;
+}
+
+.site-header {
+    padding: .5rem;
+    border-bottom: 1px solid black;
+}
