@@ -1,0 +1,14 @@
+@use 'sass:map';
+@use '../vars/breakpoints' as *;
+
+@mixin set-breakpoint($width, $type: min) {
+    @if map.has_key($breakpoints, $width) {
+        $width: map.get($breakpoints, $width);
+        @if $type == max {
+            $width: $width - 1px;
+        }
+        @media only screen and (#{$type}-width: $width) {
+            @content;
+        }
+    }
+}

@@ -1,0 +1,24 @@
+@use '../vars/config';
+
+html {
+    font-size: config.$font-size;
+    font-family: "Mona Sans", sans-serif;
+    font-optical-sizing: auto;
+    font-style: normal;
+    letter-spacing: 0.03rem;;
+}
+
+body {
+    background-color: #FAF9F6;
+}
+
+h1,
+h2,
+h3,
+h4,
+p,
+ul,
+li {
+    padding: 0;
+    margin: 0;
+}

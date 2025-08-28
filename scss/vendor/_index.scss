@@ -1,0 +1,16 @@
+// customize variables
+@use './fontawesome/variables' with (
+  // customizing $font-path
+  $font-path: '../fonts',
+);
+
+// load Font Awesome core
+@use './fontawesome/fontawesome';
+
+// load and make available Font Awesome helpers (mixins, functions, and variables)
+@use './fontawesome/fa' as fa;
+
+// load individual Font Awesome styles - add only the ones you plan to use in your project. Here is an example of a project using Classic Solid, Brands, Duotone Solid, and Sharp Duotone Solid icons...
+@use './fontawesome/solid' as fa-solid;
+@use './fontawesome/brands' as fa-brands;
+
