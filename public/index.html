@@ -16,8 +16,8 @@
                 <h2>Viewing Image Collection of <span class="user">Guest</span></h2>
             </div>
             <div class="header-buttons">
-                <button>New User</button>
-                <button>Switch User</button>
+                <button id="button-new-open">New User</button>
+                <button id="button-switch-open">Switch User</button>
             </div>
         </header>
         <main>
@@ -46,6 +46,38 @@
                 </div>
             </section>
         </main>
+        <dialog id="dialog-new">
+            <div>
+                <label for="button-new-close">
+                    <span>Close</span>
+                    <button id="button-new-close" type="button"><i>X</i></button>
+                </label>
+                <form id="form-new" action="#" method="post">
+                    <label for="new-email">
+                        <span>New User's E-mail:</span>
+                        <input id="new-email" name="new-email" type="email">
+                        <button id="button-new-submit" type="submit">Add New User</button>
+                    </label>
+                </form>
+            </div>  
+        </dialog>
+        <dialog id="dialog-switch">
+            <label for="button-switch-close">
+                <span>Close</span>
+                <button id="button-switch-close" type="button"><i>X</i></button>
+            </label>
+            <div>
+                <form id="form-switch" action="#" method="post">
+                    <label for="switch-user">
+                        <span>Select User:</span>
+                        <select id="switch-user" name="switch-user">
+                            
+                        </select>
+                        <button id="button-switch-submit" type="submit">Switch User</button>
+                    </label>
+                </form>
+            </div>
+        </dialog>
         <footer class="site-footer">
             <p>Javascript Array Assessment by <a href="https://david-stratton.netmatters-scs.co.uk">David Stratton</a></p>
         </footer>
