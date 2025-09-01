@@ -9,9 +9,6 @@
 <body>
     <div class="site-container">
         <header class="site-header">
-            <div class="site-logo">
-                <h1>DS</h1>
-            </div>
             <div>
                 <h2>Viewing Image Collection of <span class="user">Guest</span></h2>
             </div>
@@ -21,6 +18,8 @@
             </div>
         </header>
         <main>
+            <section class="notifications">
+            </section>
             <section>
                 <div class="image-select">
                     <div class="image-current">
@@ -43,34 +42,34 @@
             </section>
         </main>
         <dialog id="dialog-new">
-            <div>
+            <div class="dialog-content">
                 <label for="button-new-close">
                     <span>Close</span>
-                    <button id="button-new-close" type="button"><i>X</i></button>
+                    <button id="button-new-close" type="button"><i class="fa-solid fa-x"></i></button>
                 </label>
                 <form id="form-new" action="#" method="post">
                     <label for="new-email">
                         <span>New User's E-mail:</span>
                         <input id="new-email" name="new-email" type="email">
-                        <button id="button-new-submit" type="submit">Add New User</button>
                     </label>
+                    <button id="button-new-submit" type="submit">Add New User</button>
                 </form>
             </div>  
         </dialog>
         <dialog id="dialog-switch">
-            <label for="button-switch-close">
-                <span>Close</span>
-                <button id="button-switch-close" type="button"><i>X</i></button>
-            </label>
-            <div>
+            <div class="dialog-content">
+                <label for="button-switch-close">
+                    <span>Close</span>
+                    <button id="button-switch-close" type="button"><i class="fa-solid fa-x"></i></button>
+                </label>
                 <form id="form-switch" action="#" method="post">
                     <label for="switch-user">
                         <span>Select User:</span>
                         <select id="switch-user" name="switch-user">
 
                         </select>
-                        <button id="button-switch-submit" type="submit">Switch User</button>
                     </label>
+                    <button id="button-switch-submit" type="submit">Switch User</button>
                 </form>
             </div>
         </dialog>

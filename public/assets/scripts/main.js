@@ -4,10 +4,34 @@
 const limit = 100;
 const url = `https://picsum.photos/v2/list?limit=${limit}`;
 
-
 /****
  ** Utilities
  ****/
+
+/**
+ * Generate Notification
+ */
+const displayNotification = (type, msg) => {
+
+    const notifications = document.querySelector(".notifications");
+
+    let div = document.createElement("div");
+    div.classList.add(`notification--${type}`);
+
+    let para = document.createElement("p");
+    para.textContent = `${msg}`;
+    div.append(para);
+
+    let strong = document.createElement("strong");
+    strong.textContent = `${type}`;
+    para.prepend(strong);
+
+    let span = document.createElement("span");
+    span.textContent = `: `;
+    strong.append(span);
+
+    notifications.replaceChildren(div);
+}
 
 /**
  * Check Promise Status
@@ -77,6 +101,8 @@ let imageList = JSON.parse(localStorage.getItem('imageList'));
 let currentImage = document.querySelector(".image-current").firstElementChild;
 let currentImageId = currentImage.getAttribute("data-id");
 
+    let collection = {};
+
     if (localStorage.getItem(currentUser)) {
         collection = JSON.parse(localStorage.getItem(currentUser));
     }
@@ -86,10 +112,11 @@ let currentImageId = currentImage.getAttribute("data-id");
     localStorage.setItem(currentUser, JSON.stringify(collection));
 
     // reload Collection
-    // FIXME: only remove single image don't reload entire collection
+    // FIXME: only add single image don't reload entire collection
     showCollection();
 
-    //TODO: Notify User Image was added on webpage.
+    // display notification
+    displayNotification("success", `Image Added to Collection`)
 }
 
 /**
@@ -123,7 +150,8 @@ const removeImage = (event) => {
     // FIXME: only remove single image don't reload entire collection
     showCollection();
 
-    //TODO: Notify User Image was removed on webpage.
+    // display notification
+    displayNotification("success", `Image was removed from collection!`)
 }
 
 /**
@@ -132,19 +160,18 @@ const removeImage = (event) => {
  */
 const showCollection = () => {
     
-    // Get Collection for current user from Storage
-    let collection = JSON.parse(localStorage.getItem(currentUser));
-    
-    if (!localStorage.getItem(currentUser) || JSON.parse(localStorage.getItem(currentUser)).length == 0) {
-        // TODO: Display Notification to User on Page
-        return console.log(`No Collection found for Current User`);
-    }
+    let collection = {};
 
+    // Get Collection for current user from Storage
+    if (localStorage.getItem(currentUser)) {
+        collection = JSON.parse(localStorage.getItem(currentUser));
+    }
+    
     // Generate Collection Items
     let collectionItems = [];
 
     Object.entries(collection).forEach(([key, val]) => {
-        // TODO: Look at ways to make this code easier to read
+        // FIXME: Look at ways to make this code easier to read
         itemLi = document.createElement("li");
         itemLi.setAttribute("data-id", key);
         itemLi.classList.add("collection-item");
@@ -158,7 +185,7 @@ const showCollection = () => {
         itemDiv.classList.add("item-remove");
 
         itemIcon = document.createElement("i");
-        itemIcon.textContent = "X";
+        itemIcon.classList.add("fa-solid", "fa-x");
         
         itemDiv.append(itemIcon);
         itemLi.append(itemImg, itemDiv);
@@ -218,7 +245,6 @@ const switchUser = (userName) => {
     showCollection();
 }
 
-
 /**
  * New User Form handler
  */
@@ -232,9 +258,8 @@ const formSubmitNew = (event) => {
     userList = getUserList();
 
     // Check if User exists
-    //TODO: Display Error to User on page
     if (userList.includes(username)) {
-        return console.log("Error: User Already Exists!");
+        return displayNotification("error", `User already exists`)
     }
 
     // Add New User to userlist
@@ -260,7 +285,7 @@ const formSubmitNew = (event) => {
     dialogNewUser.close();
 
     //notify user of success
-    // TODO: Display Notification to User on Page
+    displayNotification("success", `${username} has been successfully added.`)
 }
 
 /**
@@ -271,7 +296,6 @@ const formSubmitSwitch = (event) => {
 
     //grab form input for new user name
     let username = formSwitchUser.querySelector("#switch-user").value;
-    console.log(username);
 
     // Perform User Switch
     switchUser(username);
@@ -280,7 +304,7 @@ const formSubmitSwitch = (event) => {
     dialogSwitchUser.close();
 
     // notify user of success
-    // TODO: Display Notification to User on Page
+    displayNotification("success", `Current User Switched to ${username}`)
 }
 
 /**

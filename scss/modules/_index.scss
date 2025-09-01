@@ -1,4 +1,9 @@
 // ****
+// ** Forward Notification SCSS
+// ****
+@forward "notification";
+
+// ****
 // ** Forward Header SCSS
 // ****
 @forward "header";
@@ -11,7 +16,7 @@
 // ****
 // ** Forward Main SCSS
 // ****
-@forward "Main";
+@forward "main";
 
 // ****
 // ** Forward Loader SCSS

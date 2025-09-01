@@ -1,0 +1,48 @@
+@use '../helpers/media-query' as mq;
+
+%notification {
+    text-align: center;
+    padding: 5px;
+    border-radius: 3px;
+    border: 1px solid grey;
+    height: fit-content;
+    width: 100%;
+    margin-bottom: .5rem;
+
+    strong {
+        display: block;
+        text-transform: uppercase;
+    }
+
+    span {
+        display: none;
+    }
+
+    @include mq.set-breakpoint('small') {
+        strong {
+            display: inline;
+        }
+        span {
+            display: inline;
+        }
+    }
+}
+
+.notification {
+    &--success {
+        @extend %notification;
+        background-color: #6fc46f;
+    }
+
+    &--error {
+        @extend %notification;
+        background-color: #c46f6f;
+    }
+
+    &--warning {
+        @extend %notification;
+        background-color: #c4a66f;
+    }
+
+}
+    

@@ -10599,6 +10599,10 @@
   --fa: "\f8e8";
 }
 
+* {
+  box-sizing: border-box;
+}
+
 html {
   font-size: 16px;
   font-family: "Mona Sans", sans-serif;
@@ -10607,8 +10611,12 @@ html {
   letter-spacing: 0.03rem;
 }
 
+body {
+  background-image: linear-gradient(45deg, rgb(104, 142, 247), rgb(0, 101, 202), rgb(1, 101, 119));
+}
+
 .site-container {
-  background-color: #cecece;
+  background-color: #a4c1ca;
 }
 
 body,
@@ -10623,15 +10631,76 @@ li {
   margin: 0;
 }
 
+button {
+  border-radius: 10px;
+  background-color: #adadad;
+  border: 1px solid black;
+  font-weight: 600;
+  text-transform: uppercase;
+}
+button:hover {
+  cursor: pointer;
+  background-color: #bbbbbb;
+  border: 1px solid white;
+}
+
+.header-buttons button,
+.image-controls button {
+  padding: 0.5rem;
+  margin: 0 0.5rem;
+}
+
+.site-header {
+  background-color: #84bfd1;
+}
+
 .site-container {
   display: grid;
   grid-template-rows: max-content 1fr max-content;
   min-height: 100dvh;
+  max-width: 1000px;
+  margin: 0 auto;
 }
 
 .site-header {
   padding: 0.5rem;
   border-bottom: 1px solid black;
+}
+
+.notification--warning, .notification--error, .notification--success {
+  text-align: center;
+  padding: 5px;
+  border-radius: 3px;
+  border: 1px solid grey;
+  height: -moz-fit-content;
+  height: fit-content;
+  width: 100%;
+  margin-bottom: 0.5rem;
+}
+.notification--warning strong, .notification--error strong, .notification--success strong {
+  display: block;
+  text-transform: uppercase;
+}
+.notification--warning span, .notification--error span, .notification--success span {
+  display: none;
+}
+@media only screen and (min-width: 576px) {
+  .notification--warning strong, .notification--error strong, .notification--success strong {
+    display: inline;
+  }
+  .notification--warning span, .notification--error span, .notification--success span {
+    display: inline;
+  }
+}
+
+.notification--success {
+  background-color: #6fc46f;
+}
+.notification--error {
+  background-color: #c46f6f;
+}
+.notification--warning {
+  background-color: #c4a66f;
 }
 
 .site-header {
@@ -10659,7 +10728,7 @@ main {
   display: grid;
   justify-content: center;
   padding: 1rem 0.5rem;
-  grid-template-rows: min-content 1fr;
+  grid-template-rows: min-content min-content 1fr;
 }
 
 /*
@@ -10769,22 +10838,40 @@ main {
 
 .collection-list {
   list-style: none;
-  display: flex;
-  flex-direction: column;
+  display: grid;
   gap: 1rem;
+}
+@media only screen and (min-width: 576px) {
+  .collection-list {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+@media only screen and (min-width: 992px) {
+  .collection-list {
+    grid-template-columns: repeat(3, 1fr);
+  }
 }
 
 .collection-item {
   display: grid;
   grid-template-columns: 1fr min-content;
   border: 1px solid #000000;
+  height: -moz-fit-content;
+  height: fit-content;
 }
 
 .item-remove {
-  background-color: plum;
-  padding: 0.5rem;
+  background-color: #7e7e7e;
+  padding: 0.3rem;
   align-content: center;
-  border-left: 1px solid grey;
+  border-left: 1px solid black;
+}
+.item-remove:hover {
+  cursor: pointer;
+  background-color: #919191;
+}
+.item-remove i {
+  color: red;
 }
 
 .site-footer {
@@ -10801,9 +10888,34 @@ dialog {
   position: fixed;
   inset: 0 0 0 0;
   margin: auto;
-  width: 50%;
+  width: 90%;
+  max-width: 500px;
 }
 dialog::backdrop {
-  background-image: linear-gradient(45deg, magenta, rebeccapurple, dodgerblue, green);
+  background-image: linear-gradient(45deg, green, dodgerblue, green);
   opacity: 0.75;
+}
+
+.dialog-content {
+  display: grid;
+}
+.dialog-content > label {
+  justify-self: right;
+}
+.dialog-content form {
+  display: grid;
+  margin: 1rem 0;
+  gap: 0.5rem;
+}
+.dialog-content form input,
+.dialog-content form select {
+  width: 80%;
+}
+.dialog-content form button {
+  width: -moz-fit-content;
+  width: fit-content;
+}
+.dialog-content form span {
+  display: block;
+  margin-bottom: 0.3rem;
 }/*# sourceMappingURL=style.css.map */

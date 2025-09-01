@@ -1,5 +1,9 @@
 @use '../vars/config';
 
+* {
+    box-sizing: border-box;
+}
+
 html {
     font-size: config.$font-size;
     font-family: "Mona Sans", sans-serif;
@@ -8,8 +12,17 @@ html {
     letter-spacing: 0.03rem;;
 }
 
+body {
+    background-image: linear-gradient(
+      45deg,
+      rgb(104, 142, 247),
+      rgb(0, 101, 202),
+      rgb(1, 101, 119)
+    );
+}
+
 .site-container {
-    background-color: #cecece;
+    background-color: #a4c1ca;
 }
 
 body,
@@ -22,4 +35,29 @@ ul,
 li {
     padding: 0;
     margin: 0;
+}
+
+button {
+    border-radius: 10px;
+    background-color: #adadad;
+    border: 1px solid black;
+    font-weight: 600;
+    text-transform: uppercase ;
+
+        &:hover {
+            cursor: pointer;
+            background-color: #bbbbbb;
+            border: 1px solid white;
+        }
+}
+
+.header-buttons button,
+.image-controls button {
+        padding: .5rem;
+        margin: 0 .5rem;
+}
+
+
+.site-header {
+    background-color: #84bfd1;
 }

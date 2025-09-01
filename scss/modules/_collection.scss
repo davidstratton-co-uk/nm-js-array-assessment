@@ -17,20 +17,37 @@
 
 .collection-list {
     list-style: none;
-    display: flex;
-    flex-direction: column;
+    display: grid;
     gap: 1rem;
+
+    @include mq.set-breakpoint("small") {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    @include mq.set-breakpoint("large") {
+        grid-template-columns: repeat(3, 1fr);
+    }
 }
 
 .collection-item {
     display: grid;
     grid-template-columns: 1fr min-content;
     border: 1px solid #000000;
+    height: fit-content;
 }
 
 .item-remove {
-    background-color: plum;
-    padding: .5rem;
+    background-color: #7e7e7e;
+    padding: .3rem;
     align-content: center;
-    border-left: 1px solid grey;
+    border-left: 1px solid black;
+
+    &:hover {
+        cursor: pointer;
+        background-color: #919191;
+    }
+
+    i {
+        color: red;
+    }
 }
