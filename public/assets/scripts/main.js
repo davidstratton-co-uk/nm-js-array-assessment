@@ -30,6 +30,35 @@ const displayNotification = (type, msg) => {
     span.textContent = `: `;
     strong.append(span);
 
+    notifications.appendChild(div);
+
+    setTimeout(function() {
+        div.remove();
+     }, 5000);
+}
+
+/**
+ * Generate Notification
+ */
+const clearNotification = (type, msg) => {
+
+    const notifications = document.querySelector(".notifications");
+
+    let div = document.createElement("div");
+    div.classList.add(`notification--${type}`);
+
+    let para = document.createElement("p");
+    para.textContent = `${msg}`;
+    div.append(para);
+
+    let strong = document.createElement("strong");
+    strong.textContent = `${type}`;
+    para.prepend(strong);
+
+    let span = document.createElement("span");
+    span.textContent = `: `;
+    strong.append(span);
+
     notifications.replaceChildren(div);
 }
 
@@ -105,6 +134,10 @@ let currentImageId = currentImage.getAttribute("data-id");
 
     if (localStorage.getItem(currentUser)) {
         collection = JSON.parse(localStorage.getItem(currentUser));
+    }
+
+    if (currentImageId in collection) {
+        return displayNotification("error", "Image Not Added - Already Exists in Collection!")
     }
 
     // Update Collection

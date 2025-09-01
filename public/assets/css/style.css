@@ -10646,8 +10646,15 @@ button:hover {
 
 .header-buttons button,
 .image-controls button {
-  padding: 0.5rem;
-  margin: 0 0.5rem;
+  padding: 0.3rem;
+  margin: 0 0.2rem;
+}
+@media only screen and (min-width: 576px) {
+  .header-buttons button,
+  .image-controls button {
+    padding: 0.5rem;
+    margin: 0 0.5rem;
+  }
 }
 
 .site-header {
@@ -10820,6 +10827,19 @@ main {
 
 .image-current img {
   width: 100%;
+  max-height: 300px;
+}
+@media only screen and (min-width: 576px) {
+  .image-current img {
+    padding: 0 2rem;
+    max-height: 400px;
+  }
+}
+@media only screen and (min-width: 992px) {
+  .image-current img {
+    padding: 0 2rem;
+    max-height: 500px;
+  }
 }
 
 .collection-container {

@@ -1,3 +1,5 @@
+@use '../helpers/media-query' as mq;
+
 .image-select {
     display: grid;
     justify-items: center;
@@ -6,8 +8,17 @@
     gap: 2rem;
 }
 
-.image-current {
-    img {
-        width: 100%;
+.image-current img{
+    width: 100%;
+    max-height: 300px;
+
+    @include mq.set-breakpoint("small") {
+        padding: 0 2rem;
+        max-height: 400px;
+    }
+
+    @include mq.set-breakpoint("large") {
+        padding: 0 2rem;
+        max-height: 500px;
     }
 }

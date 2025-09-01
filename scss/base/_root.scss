@@ -1,4 +1,5 @@
 @use '../vars/config';
+@use '../helpers/media-query' as mq;
 
 * {
     box-sizing: border-box;
@@ -53,8 +54,14 @@ button {
 
 .header-buttons button,
 .image-controls button {
+
+    padding: .3rem;
+    margin: 0 .2rem;
+
+    @include mq.set-breakpoint("small") {
         padding: .5rem;
         margin: 0 .5rem;
+    }
 }
 
 
