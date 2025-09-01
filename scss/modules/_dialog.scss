@@ -34,6 +34,7 @@ dialog {
     input,
     select {
       width: 80%;
+      height: 1.5rem;
     }
 
     button {
@@ -46,5 +47,14 @@ dialog {
     }
   }
 
+}
 
+.switch-buttons {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
+
+#button-del-submit {
+  background-color: red;
+  justify-self: right;
 }

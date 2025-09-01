@@ -10910,6 +10910,7 @@ dialog::backdrop {
 .dialog-content form input,
 .dialog-content form select {
   width: 80%;
+  height: 1.5rem;
 }
 .dialog-content form button {
   width: -moz-fit-content;
@@ -10918,4 +10919,14 @@ dialog::backdrop {
 .dialog-content form span {
   display: block;
   margin-bottom: 0.3rem;
+}
+
+.switch-buttons {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
+
+#button-del-submit {
+  background-color: red;
+  justify-self: right;
 }/*# sourceMappingURL=style.css.map */

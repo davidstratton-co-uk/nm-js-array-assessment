@@ -203,7 +203,6 @@ const showCollection = () => {
  */
 const getUserList = () => {
     if (!localStorage.getItem("userList")) {
-        console.log(`error: No userList Found`);
         let userList = ["guest"];
         localStorage.setItem("userList", JSON.stringify(userList));
     } 
@@ -216,14 +215,18 @@ const getUserList = () => {
 const listUsers = () => {
     let userList = getUserList();
 
-    let options = document.querySelector("#switch-user");
+    let select = document.querySelector("#switch-user");
+    let options = [];
 
+    // Generate Options
     for ( i = 0; i < userList.length; i++) {
         let option = document.createElement("option");
         option.value = userList[i];
         option.text = userList[i];
-        options.add(option);
+        options.push(option);
     }
+
+    select.replaceChildren(...options);
 }
 
 /**
@@ -308,6 +311,38 @@ const formSubmitSwitch = (event) => {
 }
 
 /**
+ * Delete User Form Handler
+ */
+const formSubmitDel = (event) => {
+    event.preventDefault();
+
+    //grab form input for new user name
+    let username = formSwitchUser.querySelector("#switch-user").value;
+
+    if (currentUser === username) {
+        switchUser("guest");
+    }
+
+    // Get User List
+    userList = getUserList();
+
+    // Perform User Deletion
+    userList = userList.filter(user => user !== username);
+    localStorage.removeItem(username);
+    localStorage.setItem("userList", JSON.stringify(userList));
+
+    // Refresh User Switch Options
+    listUsers();
+
+    // close dialog
+    dialogSwitchUser.close();
+
+    // notify user of success
+    displayNotification("success", `${username} has been deleted`)
+
+}
+
+/**
  * Webpage On Load Initialisation
  */
 const onLoadHandler = () => {
@@ -337,20 +372,20 @@ const dialogNewUser = document.querySelector("#dialog-new");
 const buttonNewOpen = document.querySelector("#button-new-open");
 const buttonNewClose = document.querySelector("#button-new-close");
 const formNewUser = document.querySelector("#form-new");
-const buttonNewSubmit = document.querySelector("#button-new-submit");
 buttonNewOpen.addEventListener("click", () => dialogNewUser.showModal());
 buttonNewClose.addEventListener("click", () => dialogNewUser.close());
-buttonNewSubmit.addEventListener("click", formSubmitNew);
+formNewUser.addEventListener("submit", formSubmitNew);
 
 // Switch User Dialog Events
 const dialogSwitchUser = document.querySelector("#dialog-switch");
 const buttonSwitchOpen = document.querySelector("#button-switch-open");
 const buttonSwitchClose = document.querySelector("#button-switch-close");
 const formSwitchUser = document.querySelector("#form-switch");
-const buttonSwitchSubmit = document.querySelector("#button-switch-submit");
+const buttonDelUser = document.querySelector("#button-del-submit");
 buttonSwitchOpen.addEventListener("click", () => dialogSwitchUser.showModal());
 buttonSwitchClose.addEventListener("click", () => dialogSwitchUser.close());
-buttonSwitchSubmit.addEventListener("click", formSubmitSwitch);
+formSwitchUser.addEventListener("submit", formSubmitSwitch);
+buttonDelUser.addEventListener("click", formSubmitDel);
 
 // On Load Events
 document.addEventListener('DOMContentLoaded', onLoadHandler);
