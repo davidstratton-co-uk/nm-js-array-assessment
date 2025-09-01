@@ -10644,8 +10644,15 @@ li {
 .site-header .header-buttons {
   text-align: center;
 }
+.site-header h2 {
+  word-break: break-word;
+}
 .site-header span {
   display: block;
+}
+
+.user {
+  text-transform: uppercase;
 }
 
 main {

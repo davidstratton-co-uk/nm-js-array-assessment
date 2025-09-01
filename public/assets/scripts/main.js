@@ -1,4 +1,18 @@
-function checkStatus(response) {
+/****
+ ** Config
+ ****/
+const limit = 100;
+const url = `https://picsum.photos/v2/list?limit=${limit}`;
+
+
+/****
+ ** Utilities
+ ****/
+
+/**
+ * Check Promise Status
+ */
+const checkStatus = (response) => {
   if (response.ok) {
     return Promise.resolve(response);
   } else {
@@ -6,7 +20,10 @@ function checkStatus(response) {
   }
 }
 
-function fetchImageList(url) {
+/**
+ * Fetch Image List from API
+ */
+const fetchImageList = (url) => {
     return fetch(url)
         .then(checkStatus)
         .then(res => res.json())
@@ -16,7 +33,11 @@ function fetchImageList(url) {
         .catch(error => console.error(`error: ${error.message}`));
 }
 
-function generateImage(data) {
+/**
+ * Pick Random Image from Image List
+ * Replace Image with New Image
+ */
+const generateImage = (data) => {
     number = Math.round(Math.random () * 100);
     let currentImage = document.querySelector(".image-current").firstElementChild;
 
@@ -28,6 +49,9 @@ function generateImage(data) {
     currentImage.replaceWith(image);
 }
 
+/**
+ * Check if Image List is in local storage if not fetch list from api
+ */
 const randomImage = () => {
 
     if (localStorage.getItem('imageList')) {
@@ -42,6 +66,10 @@ const randomImage = () => {
         });
 }
 
+/**
+ * Add Image to users collection
+ * Update collection in local storage
+ */
 const addImage = () => {
 
 let imageList = JSON.parse(localStorage.getItem('imageList'));
@@ -49,36 +77,74 @@ let imageList = JSON.parse(localStorage.getItem('imageList'));
 let currentImage = document.querySelector(".image-current").firstElementChild;
 let currentImageId = currentImage.getAttribute("data-id");
 
-    if (!currentUser) {
-        // this shouldn't be possible for failsafe anyway
-        let currentUser = "guest";
-    }
-
     if (localStorage.getItem(currentUser)) {
-        console.log(`Current Collection found for Current User`);
         collection = JSON.parse(localStorage.getItem(currentUser));
     }
 
+    // Update Collection
     collection[currentImageId] = imageList[currentImageId];
     localStorage.setItem(currentUser, JSON.stringify(collection));
-    console.log(`Image Added to ${currentUser}'s collection`)
+
+    // reload Collection
+    // FIXME: only remove single image don't reload entire collection
+    showCollection();
+
+    //TODO: Notify User Image was added on webpage.
 }
 
-const showCollection = () => {
-    
-    if (!currentUser) {
-        // this shouldn't be possible for failsafe anyway
-        let currentUser = "guest";
+/**
+ * Remove Image to users collection
+ * Update collection in local storage
+ */
+const removeImage = (event) => {
+
+    if (!(event.target.classList.contains("item-remove") || event.target.parentElement.classList.contains("item-remove"))) {
+        return;
     }
 
-    if (!localStorage.getItem(currentUser)) {
+    if (event.target.parentElement.classList.contains("item-remove")) {
+        parent = event.target.parentElement.parentElement;
+    } else {
+        parent = event.target.parentElement;
+    }
+
+    let image = parent.getAttribute("data-id");
+
+    // get collection from local storage
+    collection = JSON.parse(localStorage.getItem(currentUser));
+
+    // remove image from collection
+    delete collection[image];
+
+    // update localstorage
+    localStorage.setItem(currentUser, JSON.stringify(collection));
+
+    // reload Collection
+    // FIXME: only remove single image don't reload entire collection
+    showCollection();
+
+    //TODO: Notify User Image was removed on webpage.
+}
+
+/**
+ * Generate HTML for Collection
+ * Add Collection to page
+ */
+const showCollection = () => {
+    
+    // Get Collection for current user from Storage
+    let collection = JSON.parse(localStorage.getItem(currentUser));
+    
+    if (!localStorage.getItem(currentUser) || JSON.parse(localStorage.getItem(currentUser)).length == 0) {
+        // TODO: Display Notification to User on Page
         return console.log(`No Collection found for Current User`);
     }
 
-    console.log(`Current Collection found for Current User`);
-    console.log(`current user: ${currentUser}`);
-    collection = JSON.parse(localStorage.getItem(currentUser));
+    // Generate Collection Items
+    let collectionItems = [];
+
     Object.entries(collection).forEach(([key, val]) => {
+        // TODO: Look at ways to make this code easier to read
         itemLi = document.createElement("li");
         itemLi.setAttribute("data-id", key);
         itemLi.classList.add("collection-item");
@@ -96,26 +162,36 @@ const showCollection = () => {
         
         itemDiv.append(itemIcon);
         itemLi.append(itemImg, itemDiv);
-        collectionList.append(itemLi);
+
+        collectionItems.push(itemLi);
     });
+
+    // Add Collection Items to webpage.
+    const collectionList = document.querySelector(".collection-list");
+    collectionList.replaceChildren(...collectionItems);
 }
 
-function getUserList() {
+/**
+ * Get user list from local storage
+ */
+const getUserList = () => {
     if (!localStorage.getItem("userList")) {
         console.log(`error: No userList Found`);
-        let userList = ["Guest"];
+        let userList = ["guest"];
         localStorage.setItem("userList", JSON.stringify(userList));
-        return userList;
     } 
     return JSON.parse(localStorage.getItem("userList"));
 }
 
-function listUsers() {
+/**
+ * update options for user list selection
+ */
+const listUsers = () => {
     let userList = getUserList();
 
     let options = document.querySelector("#switch-user");
 
-    for ( i = 1; i < userList.length; i++) {
+    for ( i = 0; i < userList.length; i++) {
         let option = document.createElement("option");
         option.value = userList[i];
         option.text = userList[i];
@@ -123,15 +199,29 @@ function listUsers() {
     }
 }
 
-const switchUser = () => {
-    console.log("User Switch Performed");
-    //set currentUser to new user
-    //switch header to new user
-    //switch collection header to new user
-    //load new empty collection
+/**
+ * Switch Current user
+ * Update headers, Show New Collection
+ */
+const switchUser = (userName) => {
+
+    const userLabel = document.querySelector(".site-header span.user");
+
+    // set currentUser to new user
+    currentUser = userName;
+    localStorage.setItem("currentUser", currentUser);
+
+    // switch header to new user
+    userLabel.textContent = currentUser;
+    
+    // load new collection
+    showCollection();
 }
 
-// Could Fit these functions together.
+
+/**
+ * New User Form handler
+ */
 const formSubmitNew = (event) => {
     event.preventDefault();
 
@@ -139,25 +229,29 @@ const formSubmitNew = (event) => {
     username = formNewUser.querySelector("#new-email").value;
     
     // Get User List
-    if (localStorage.getItem["userList"]) {
-        userList = JSON.parse(localStorage.getItem["userList"]);
-    }
+    userList = getUserList();
 
     // Check if User exists
+    //TODO: Display Error to User on page
     if (userList.includes(username)) {
         return console.log("Error: User Already Exists!");
     }
 
     // Add New User to userlist
     userList.push(username);
+
+    // Update Local Storage
     localStorage.setItem("userList", JSON.stringify(userList));
 
-    // Update User Selection Option
+    // Update User Selection Options
     let options = document.querySelector("#switch-user");
     let option = document.createElement("option");
     option.value = username;
     option.text = username;
     options.add(option);
+
+    // Reset New User Field
+    formNewUser.querySelector("#new-email").value = " ";
 
     // Perform User Switch
     switchUser(username);
@@ -166,42 +260,55 @@ const formSubmitNew = (event) => {
     dialogNewUser.close();
 
     //notify user of success
+    // TODO: Display Notification to User on Page
 }
 
+/**
+ * Switch User Form Handler
+ */
 const formSubmitSwitch = (event) => {
     event.preventDefault();
 
     //grab form input for new user name
+    let username = formSwitchUser.querySelector("#switch-user").value;
+    console.log(username);
+
+    // Perform User Switch
     switchUser(username);
 
-    //close dialog
+    // close dialog
     dialogSwitchUser.close();
 
-    //notify user of success
+    // notify user of success
+    // TODO: Display Notification to User on Page
 }
 
+/**
+ * Webpage On Load Initialisation
+ */
 const onLoadHandler = () => {
     listUsers();
     randomImage();
-    showCollection();
+
+    let currentUser = localStorage.getItem('currentUser') === null ? "guest" : localStorage.getItem('currentUser');
+    switchUser(currentUser);
 }
 
-const limit = 100;
-const url = `https://picsum.photos/v2/list?limit=${limit}`;
+/****
+ ** Events
+ ****/
 
-let currentUser = localStorage.getItem('currentUser') === null ? "guest" : localStorage.getItem('currentUser');
-const userLabel = document.querySelector("h2 span.user");
-
-if (currentUser !== null) {
-    userLabel.textContent = currentUser;
-}
-
-let collection = {};
-
+// Image Controls Events
 const imageRandomButton = document.querySelector(".image-new");
 const imageAddButton = document.querySelector(".image-add");
-const collectionList = document.querySelector(".collection-list");
+imageRandomButton.addEventListener("click", randomImage);
+imageAddButton.addEventListener("click", addImage);
 
+// Collection Events
+const collectionRemoveButton = document.querySelector(".collection-list");
+collectionRemoveButton.addEventListener("click", removeImage);
+
+// New User Dialog Events
 const dialogNewUser = document.querySelector("#dialog-new");
 const buttonNewOpen = document.querySelector("#button-new-open");
 const buttonNewClose = document.querySelector("#button-new-close");
@@ -211,6 +318,7 @@ buttonNewOpen.addEventListener("click", () => dialogNewUser.showModal());
 buttonNewClose.addEventListener("click", () => dialogNewUser.close());
 buttonNewSubmit.addEventListener("click", formSubmitNew);
 
+// Switch User Dialog Events
 const dialogSwitchUser = document.querySelector("#dialog-switch");
 const buttonSwitchOpen = document.querySelector("#button-switch-open");
 const buttonSwitchClose = document.querySelector("#button-switch-close");
@@ -220,7 +328,5 @@ buttonSwitchOpen.addEventListener("click", () => dialogSwitchUser.showModal());
 buttonSwitchClose.addEventListener("click", () => dialogSwitchUser.close());
 buttonSwitchSubmit.addEventListener("click", formSubmitSwitch);
 
+// On Load Events
 document.addEventListener('DOMContentLoaded', onLoadHandler);
-
-imageRandomButton.addEventListener("click", randomImage);
-imageAddButton.addEventListener("click", addImage);
