@@ -9,7 +9,7 @@ const url = `https://picsum.photos/v2/list?limit=${limit}`;
  ****/
 
 /**
- * Generate Notification
+ * Generate Notification with timed removal
  */
 const displayNotification = (type, msg) => {
 
@@ -35,31 +35,6 @@ const displayNotification = (type, msg) => {
     setTimeout(function() {
         div.remove();
      }, 5000);
-}
-
-/**
- * Generate Notification
- */
-const clearNotification = (type, msg) => {
-
-    const notifications = document.querySelector(".notifications");
-
-    let div = document.createElement("div");
-    div.classList.add(`notification--${type}`);
-
-    let para = document.createElement("p");
-    para.textContent = `${msg}`;
-    div.append(para);
-
-    let strong = document.createElement("strong");
-    strong.textContent = `${type}`;
-    para.prepend(strong);
-
-    let span = document.createElement("span");
-    span.textContent = `: `;
-    strong.append(span);
-
-    notifications.replaceChildren(div);
 }
 
 /**
@@ -91,7 +66,7 @@ const fetchImageList = (url) => {
  * Replace Image with New Image
  */
 const generateImage = (data) => {
-    number = Math.round(Math.random () * 100);
+    number = Math.round(Math.random () * limit);
     let currentImage = document.querySelector(".image-current").firstElementChild;
 
     let image = document.createElement("img");
@@ -284,13 +259,20 @@ const switchUser = (userName) => {
     showCollection();
 }
 
+/**
+ * Display Form Rrror
+ * 
+ */
 const displayFormError = (errorMsg) => {
     console.log(errorMsg);
 }
 
+/**
+ * E-Mail Validation
+ * 
+ */
 const isValidEmail = (email) => {
-    console.log(`function - ${email.trim()}`);
-    // check exists
+
     if (email.trim().length == 0 ) { 
         displayFormError("E-mail can not be blank");
         return false;
@@ -300,12 +282,12 @@ const isValidEmail = (email) => {
         displayFormError("E-mail can not start with .");
         return false;
     }
-
-    // perform full validation
+    
     const validEmail = new RegExp(/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i);
-    const validEmailStart = new RegExp(/^[A-Z0-9._%+-]+@/i):
+    const validEmailStart = new RegExp(/^[A-Z0-9._%+-]+@/i);
     const validEmailDomain = new RegExp(/@[A-Z0-9.-]+\.[A-Z]{2,}$/i);
 
+    // Perform Full E-mail Validation  
     if (validEmail.test(email)) {
         return true;
     }
@@ -344,7 +326,6 @@ const formSubmitNew = (event) => {
 
     // Get Username
     email = formNewUser.querySelector("#new-email").value;
-    console.log(`form - ${email}`);
     // Get User List
     userList = getUserList();
 
