@@ -100,6 +100,8 @@ const generateImage = (data) => {
     image.setAttribute("data-id", data[number].id );
     
     currentImage.replaceWith(image);
+    let currentImageData = data[number];
+    return currentImageData;
 }
 
 /**
@@ -109,13 +111,15 @@ const randomImage = () => {
 
     if (localStorage.getItem('imageList')) {
         let imageList = JSON.parse(localStorage.getItem('imageList'));
-        return generateImage(imageList);
+        currentImageData = generateImage(imageList);
+        return currentImageData;
     }
 
-    return fetchImageList(url)
+    fetchImageList(url)
         .then(data => {
-            generateImage(data);
             localStorage.setItem('imageList', JSON.stringify(data));
+            currentImageData = generateImage(data);
+            return currentImageData;
         });
 }
 
@@ -127,8 +131,7 @@ const addImage = () => {
 
 let imageList = JSON.parse(localStorage.getItem('imageList'));
 
-let currentImage = document.querySelector(".image-current").firstElementChild;
-let currentImageId = currentImage.getAttribute("data-id");
+let ImageData = currentImageData;
 
     let collection = {};
 
@@ -136,12 +139,12 @@ let currentImageId = currentImage.getAttribute("data-id");
         collection = JSON.parse(localStorage.getItem(currentUser));
     }
 
-    if (currentImageId in collection) {
+    if (ImageData.id in collection) {
         return displayNotification("error", "Image Not Added - Already Exists in Collection!")
     }
 
     // Update Collection
-    collection[currentImageId] = imageList[currentImageId];
+    collection[ImageData.id] = ImageData;
     localStorage.setItem(currentUser, JSON.stringify(collection));
 
     // reload Collection
