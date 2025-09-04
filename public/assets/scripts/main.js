@@ -284,6 +284,58 @@ const switchUser = (userName) => {
     showCollection();
 }
 
+const displayFormError = (errorMsg) => {
+    console.log(errorMsg);
+}
+
+const isValidEmail = (email) => {
+    console.log(`function - ${email.trim()}`);
+    // check exists
+    if (email.trim().length == 0 ) { 
+        displayFormError("E-mail can not be blank");
+        return false;
+    }
+
+    if (email.startsWith(".")) {
+        displayFormError("E-mail can not start with .");
+        return false;
+    }
+
+    // perform full validation
+    const validEmail = new RegExp(/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i);
+    const validEmailStart = new RegExp(/^[A-Z0-9._%+-]+@/i):
+    const validEmailDomain = new RegExp(/@[A-Z0-9.-]+\.[A-Z]{2,}$/i);
+
+    if (validEmail.test(email)) {
+        return true;
+    }
+
+    // Define Specific Error
+    if (!email.includes("@")) {
+        displayFormError("E-mail must contain an @");
+        return false;
+    }
+
+    if (!email.includes(".")) {
+        displayFormError("E-mail must contain an .");
+        return false;
+    }
+
+    if (!validEmailStart.test(email)) {
+        displayFormError("E-mail must contain at least one letter before the @ symbol");
+        return false;
+    }
+
+    if (!validEmailDomain.test(email)) {
+        displayFormError("E-mail must contain a valid domain");
+        return false;
+    }
+
+    // Safety Catch-All
+    displayFormError("E-mail is not valid");
+    return false;
+}
+ 
 /**
  * New User Form handler
  */
@@ -291,18 +343,22 @@ const formSubmitNew = (event) => {
     event.preventDefault();
 
     // Get Username
-    username = formNewUser.querySelector("#new-email").value;
-    
+    email = formNewUser.querySelector("#new-email").value;
+    console.log(`form - ${email}`);
     // Get User List
     userList = getUserList();
 
     // Check if User exists
-    if (userList.includes(username)) {
-        return displayNotification("error", `User already exists`)
+    if (userList.includes(email)) {
+        return displayFormError(`User already exists`);
+    }
+
+    if (!isValidEmail(email)) {
+        return;
     }
 
     // Add New User to userlist
-    userList.push(username);
+    userList.push(email);
 
     // Update Local Storage
     localStorage.setItem("userList", JSON.stringify(userList));
@@ -310,21 +366,21 @@ const formSubmitNew = (event) => {
     // Update User Selection Options
     let options = document.querySelector("#switch-user");
     let option = document.createElement("option");
-    option.value = username;
-    option.text = username;
+    option.value = email;
+    option.text = email;
     options.add(option);
 
     // Reset New User Field
     formNewUser.querySelector("#new-email").value = " ";
 
     // Perform User Switch
-    switchUser(username);
+    switchUser(email);
 
     //close dialog
     dialogNewUser.close();
 
     //notify user of success
-    displayNotification("success", `${username} has been successfully added.`)
+    displayNotification("success", `${email} has been successfully added.`)
 }
 
 /**
