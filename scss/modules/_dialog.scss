@@ -8,13 +8,8 @@ dialog {
   max-width: 500px;
 
   &::backdrop {
-    background-image: linear-gradient(
-      45deg,
-      green,
-      dodgerblue,
-      green
-    );
-    opacity: 0.75;
+    background: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(10px);
   }
 }
 
@@ -28,30 +23,44 @@ dialog {
 
   form {
     display: grid;
-    margin: 1rem 0;
+    margin: 0 1.5rem 1rem;
     gap: .5rem;
     
     input,
     select {
-      width: 80%;
+      width: 100%;
       height: 1.5rem;
+      margin-top: .3rem;
     }
 
     button {
       width: fit-content;
     }
 
-    span {
-      display: block;
-      margin-bottom: 0.3rem;
-    }
   }
 
 }
 
+#button-new-close,
+#button-switch-close {
+  height: 1.5rem;
+}
+
+.new-buttons,
 .switch-buttons {
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: max-content 1fr;
+  align-items: center;
+}
+
+#new-error {
+  background-color: #c46f6f;
+  font-size: .8rem;
+  padding: .2em;
+  margin: 0 1rem;
+  font-weight: 600;
+  text-align: center;
+  vertical-align: text-top;
 }
 
 #button-del-submit {

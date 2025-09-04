@@ -44,7 +44,7 @@
         <dialog id="dialog-new">
             <div class="dialog-content">
                 <label for="button-new-close">
-                    <span>Close</span>
+                    <span class="sr-only">Close</span>
                     <button id="button-new-close" type="button"><i class="fa-solid fa-x"></i></button>
                 </label>
                 <form id="form-new" action="#" method="post">
@@ -52,14 +52,17 @@
                         <span>New User's E-mail:</span>
                         <input id="new-email" name="new-email" type="text">
                     </label>
-                    <button id="button-new-submit" type="submit">Add New User</button>
+                    <div class="new-buttons">
+                        <button id="button-new-submit" type="submit">Add New User</button>
+                        <div id="new-error"><p>E-mail can not be blank</p></div>
+                    </div>
                 </form>
             </div>  
         </dialog>
         <dialog id="dialog-switch">
             <div class="dialog-content">
                 <label for="button-switch-close">
-                    <span>Close</span>
+                    <span class="sr-only">Close</span>
                     <button id="button-switch-close" type="button"><i class="fa-solid fa-x"></i></button>
                 </label>
                 <form id="form-switch" action="#" method="post">

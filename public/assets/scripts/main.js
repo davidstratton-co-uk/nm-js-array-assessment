@@ -1,7 +1,7 @@
 /****
  ** Config
  ****/
-const limit = 200;
+const limit = 100;
 const url = `https://picsum.photos/v2/list?limit=${limit}`;
 
 /****
@@ -83,12 +83,11 @@ const generateImage = (data) => {
  * Check if Image List is in local storage if not fetch list from api
  */
 const randomImage = () => {
-
     
     if (localStorage.getItem('imageList')) {
         let imageList = JSON.parse(localStorage.getItem('imageList'));
 
-        // TODO: Local Storage Expiration
+        // TODO: Add Local Storage Expiration
         // TODO: Check if imageList is the same size as current limit
 
         currentImageData = generateImage(imageList);
@@ -271,6 +270,15 @@ const switchUser = (userName) => {
  */
 const displayFormError = (errorMsg) => {
     console.log(errorMsg);
+    // replace if error is already there
+}
+
+/**
+ * Display Form Rrror
+ * 
+ */
+const clearFormError = (errorMsg) => {
+    // clear all email errprs
 }
 
 /**
@@ -279,26 +287,27 @@ const displayFormError = (errorMsg) => {
  */
 const isValidEmail = (email) => {
 
+    const validEmail = new RegExp(/^[^.][A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i);
+    const validEmailStart = new RegExp(/^[A-Z0-9._%+-]+@/i);
+    const validEmailEnd = new RegExp(/@[A-Z0-9.-]+\.[A-Z]{2,}$/i);
+
+    // Perform Full E-mail Validation  
+    if (validEmail.test(email)) {
+        clearEmailError();
+        return true;
+    }
+
+    // Define Specific Error
     if (email.trim().length == 0 ) { 
         displayFormError("E-mail can not be blank");
         return false;
     }
 
     if (email.startsWith(".")) {
-        displayFormError("E-mail can not start with .");
+        clearFormError("E-mail can not start with .");
         return false;
     }
     
-    const validEmail = new RegExp(/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i);
-    const validEmailStart = new RegExp(/^[A-Z0-9._%+-]+@/i);
-    const validEmailDomain = new RegExp(/@[A-Z0-9.-]+\.[A-Z]{2,}$/i);
-
-    // Perform Full E-mail Validation  
-    if (validEmail.test(email)) {
-        return true;
-    }
-
-    // Define Specific Error
     if (!email.includes("@")) {
         displayFormError("E-mail must contain an @");
         return false;
@@ -314,12 +323,12 @@ const isValidEmail = (email) => {
         return false;
     }
 
-    if (!validEmailDomain.test(email)) {
+    if (!validEmailEnd.test(email)) {
         displayFormError("E-mail must contain a valid domain");
         return false;
     }
 
-    // Safety Catch-All
+    // Safety Catch-All - specific errors can be removed
     displayFormError("E-mail is not valid");
     return false;
 }
