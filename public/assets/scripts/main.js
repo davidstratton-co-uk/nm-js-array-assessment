@@ -1,7 +1,7 @@
 /****
  ** Config
  ****/
-const limit = 100;
+const limit = 200;
 const url = `https://picsum.photos/v2/list?limit=${limit}`;
 
 /****
@@ -84,8 +84,13 @@ const generateImage = (data) => {
  */
 const randomImage = () => {
 
+    
     if (localStorage.getItem('imageList')) {
         let imageList = JSON.parse(localStorage.getItem('imageList'));
+
+        // TODO: Local Storage Expiration
+        // TODO: Check if imageList is the same size as current limit
+
         currentImageData = generateImage(imageList);
         return currentImageData;
     }
@@ -95,7 +100,8 @@ const randomImage = () => {
             localStorage.setItem('imageList', JSON.stringify(data));
             currentImageData = generateImage(data);
             return currentImageData;
-        });
+        }
+    );
 }
 
 /**
