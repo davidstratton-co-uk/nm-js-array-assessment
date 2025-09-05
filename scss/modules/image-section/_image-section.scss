@@ -15,7 +15,8 @@
     4px 4.1px 6.4px -1.7px hsl(21deg 26% 60% / 0.36),
     9.6px 10px 15.6px -2.5px hsl(21deg 26% 60% / 0.36);
     align-items: center;
-
+    border-radius: 30px;
+    
     @include mq.set-breakpoint("large") {
         grid-template-rows: 40dvh min-content;
     }
