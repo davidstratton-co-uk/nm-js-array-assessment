@@ -270,6 +270,11 @@ const switchUser = (userName) => {
  */
 const displayFormError = (errorMsg) => {
     console.log(errorMsg);
+
+    let p = document.createElement("p");
+    p.textContent = errorMsg;
+
+    formNewError.replaceChildren(p);
     // replace if error is already there
 }
 
@@ -278,7 +283,7 @@ const displayFormError = (errorMsg) => {
  * 
  */
 const clearFormError = (errorMsg) => {
-    // clear all email errprs
+    formNewError.innerHTML = "";
 }
 
 /**
@@ -287,13 +292,18 @@ const clearFormError = (errorMsg) => {
  */
 const isValidEmail = (email) => {
 
-    const validEmail = new RegExp(/^[^.][A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i);
+    const validEmail = new RegExp(/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i);
     const validEmailStart = new RegExp(/^[A-Z0-9._%+-]+@/i);
     const validEmailEnd = new RegExp(/@[A-Z0-9.-]+\.[A-Z]{2,}$/i);
 
+    if (email.startsWith(".")) {
+        displayFormError("E-mail can not start with .");
+        return false;
+    }
+
     // Perform Full E-mail Validation  
     if (validEmail.test(email)) {
-        clearEmailError();
+        clearFormError();
         return true;
     }
 
@@ -302,19 +312,9 @@ const isValidEmail = (email) => {
         displayFormError("E-mail can not be blank");
         return false;
     }
-
-    if (email.startsWith(".")) {
-        clearFormError("E-mail can not start with .");
-        return false;
-    }
     
     if (!email.includes("@")) {
         displayFormError("E-mail must contain an @");
-        return false;
-    }
-
-    if (!email.includes(".")) {
-        displayFormError("E-mail must contain an .");
         return false;
     }
 
@@ -460,6 +460,7 @@ const dialogNewUser = document.querySelector("#dialog-new");
 const buttonNewOpen = document.querySelector("#button-new-open");
 const buttonNewClose = document.querySelector("#button-new-close");
 const formNewUser = document.querySelector("#form-new");
+const formNewError = document.querySelector("#new-error");
 buttonNewOpen.addEventListener("click", () => dialogNewUser.showModal());
 buttonNewClose.addEventListener("click", () => dialogNewUser.close());
 formNewUser.addEventListener("submit", formSubmitNew);
