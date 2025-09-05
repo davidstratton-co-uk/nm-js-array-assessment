@@ -1,9 +1,10 @@
 @use '../helpers/media-query' as mq;
 
 .site-footer {
+    background-color: #f5dede;
     display: grid;
     justify-items: center;
-    border-top: 1px solid #000000;
+    border-top: 1px rgb(0 0 0 / 15%) solid;
     padding: .5rem;
 
     a {

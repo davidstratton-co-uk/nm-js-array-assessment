@@ -1,11 +1,19 @@
-@use '../helpers/media-query' as mq;
+@use '../../helpers/media-query' as mq;
 
 .image-select {
     display: grid;
     justify-items: center;
-    border: 1px solid #000;
+    width: 85%;
+    margin: auto;
     padding: 1rem;
     gap: 2rem;
+    background-color: white;
+    box-shadow:
+    0.5px 0.5px 0.8px hsl(21deg 26% 60% / 0.36),
+    1.6px 1.6px 2.5px -0.8px hsl(21deg 26% 60% / 0.36),
+    4px 4.1px 6.4px -1.7px hsl(21deg 26% 60% / 0.36),
+    9.6px 10px 15.6px -2.5px hsl(21deg 26% 60% / 0.36);
+
 }
 
 .image-current img{

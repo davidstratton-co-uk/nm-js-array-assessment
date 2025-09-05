@@ -3,6 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Gantari:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="assets/css/style.min.css">
     <title>Javascript Array Assessment | David Stratton</title>
 </head>
@@ -13,8 +16,8 @@
                 <h2>Viewing Image Collection of <span class="user">Guest</span></h2>
             </div>
             <div class="header-buttons">
-                <button id="button-new-open">New User</button>
-                <button id="button-switch-open">Switch User</button>
+                <button id="button-new-open" class="header-btn"><span>New User</span><i class="fa-solid fa-user-plus"></i></button>
+                <button id="button-switch-open" class="header-btn"><span>Switch User</span><i class="fa-solid fa-repeat"></i></button>
             </div>
         </header>
         <main>
@@ -26,14 +29,16 @@
                         <span class="loader"></span>
                     </div>
                     <div class="image-controls">
-                        <button class="image-add" type="button">Add Image to List</button>
-                        <button class="image-new" type="button">New Random Image</button>
+                        <button id="image-add" class="image-btn" type="button"><span class="span">Add Image to Collection</span></button>
+                        <button id="image-new" class="image-btn" type="button"><span class="span"></span>New Random Image</span></button>
                     </div>
                 </div>
             </div>
-            <section>
+            <section> 
                 <div class="collection-container">
-                    <h3>Collection:</h3>
+                    <header>
+                        <h3>Collection</h3><span>- Button next to images lets you remove them from your collection</span>
+                    </header>
                     <div class="collection-view">
                         <ul class="collection-list">
                         </ul>
@@ -53,7 +58,7 @@
                         <input id="new-email" name="new-email" type="text">
                     </label>
                     <div class="new-buttons">
-                        <button id="button-new-submit" type="submit">Add New User</button>
+                        <button id="button-new-submit" class="dialog-btn" type="submit">Add New User</button>
                         <div id="new-error"><p>E-mail can not be blank</p></div>
                     </div>
                 </form>
@@ -73,8 +78,8 @@
                         </select>
                     </label>
                     <div class="switch-buttons">
-                        <button id="button-switch-submit" type="submit">Switch User</button>
-                        <button id="button-del-submit" type="submit">Delete User</button>
+                        <button id="button-switch-submit" class="dialog-btn" type="submit">Switch User</button>
+                        <button id="button-del-submit" class="dialog-btn" type="submit">Delete User</button>
                     </div>
                 </form>
             </div>

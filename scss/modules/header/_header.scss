@@ -1,0 +1,18 @@
+@use '../../helpers/media-query' as mq;
+
+.site-header {
+    display: grid;
+    gap: .5rem;
+    padding: .5rem;
+    border-bottom: 1px rgb(0 0 0 / 15%) solid;
+    justify-items: center;
+    background-color: #f5dede;
+
+    h2 {
+        word-break: break-word;
+    }
+
+    span {
+        display: block;
+    }
+}

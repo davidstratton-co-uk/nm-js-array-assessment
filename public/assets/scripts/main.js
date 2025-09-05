@@ -446,8 +446,8 @@ const onLoadHandler = () => {
  ****/
 
 // Image Controls Events
-const imageRandomButton = document.querySelector(".image-new");
-const imageAddButton = document.querySelector(".image-add");
+const imageRandomButton = document.querySelector("#image-new");
+const imageAddButton = document.querySelector("#image-add");
 imageRandomButton.addEventListener("click", randomImage);
 imageAddButton.addEventListener("click", addImage);
 

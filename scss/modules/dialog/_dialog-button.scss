@@ -1,0 +1,49 @@
+.new-buttons,
+.switch-buttons {
+  display: grid;
+  grid-template-columns: max-content 1fr;
+  align-items: center;
+}
+
+.dialog-btn {
+  display: flex;
+  padding: .5rem;
+  margin: 0 .5rem;
+  text-decoration: none;
+  color: white;
+  background: #3c85c0;
+  transition: 1s;
+  box-shadow: 6px 6px 0 black;
+  transform: skewX(-15deg);
+  border: none;
+  gap: .5rem;
+  cursor: pointer;
+}
+
+.dialog-btn:focus {
+  outline: none;
+}
+
+.dialog-btn:hover {
+  transition: 0.5s;
+  box-shadow: 10px 10px 0 black;
+}
+
+#button-del-submit {
+  background-color: red;
+  justify-self: right;
+}
+
+#button-new-close,
+#button-switch-close {
+  all: unset;
+  display: block;
+  padding: .2rem;
+  cursor: pointer;
+  border-radius: 50%;
+  
+
+  &:hover  {
+    outline: 1px solid black;
+  }
+}

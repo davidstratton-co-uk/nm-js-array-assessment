@@ -1,0 +1,29 @@
+.item-remove {
+  display: flex;
+  padding: .5rem;
+  text-decoration: none;
+  color: #fff;
+  background: #3c85c0;
+  transition: 1s;
+  border: none;
+  cursor: pointer;
+  align-items: center;
+
+  i {
+    color: rgb(214, 69, 69);
+  }
+
+}
+
+.item-remove:focus {
+  outline: none;
+}
+
+.item-remove:hover {
+  transition: 0.5s;
+  background: hsl(207, 52%, 59%);
+}
+
+.span {
+  transform: skewX(15deg);
+}

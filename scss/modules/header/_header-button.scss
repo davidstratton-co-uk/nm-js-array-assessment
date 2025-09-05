@@ -1,0 +1,32 @@
+.header-buttons {
+  display: flex;
+  flex-direction: row;
+  padding-bottom: .5rem;
+}
+
+.header-btn {
+  display: flex;
+  padding: 11px 33px;
+  text-decoration: none;
+  color: white;
+  background: #3c85c0;
+  transition: 1s;
+  box-shadow: 6px 6px 0 black;
+  transform: skewX(-15deg);
+  border: none;
+  gap: .5rem;
+  cursor: pointer;
+}
+
+.header-btn:focus {
+  outline: none;
+}
+
+.header-btn:hover {
+  transition: 0.5s;
+  box-shadow: 10px 10px 0 black;
+}
+
+.span {
+  transform: skewX(15deg);
+}

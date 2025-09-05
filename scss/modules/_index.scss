@@ -1,7 +1,7 @@
 // ****
-// ** Forward Notification SCSS
+// ** Forward Dialog SCSS
 // ****
-@forward "notification";
+@forward "dialog";
 
 // ****
 // ** Forward Header SCSS
@@ -9,19 +9,14 @@
 @forward "header";
 
 // ****
-// ** Forward User Label SCSS
+// ** Forward Notification SCSS
 // ****
-@forward "user-label";
+@forward "notification";
 
 // ****
 // ** Forward Main SCSS
 // ****
 @forward "main";
-
-// ****
-// ** Forward Loader SCSS
-// ****
-@forward "loader";
 
 // ****
 // ** Forward Image Controls SCSS
@@ -37,8 +32,3 @@
 // ** Forward Footer SCSS
 // ****
 @forward "footer";
-
-// ****
-// ** Forward Dialog SCSS
-// ****
-@forward "dialog";
