@@ -10877,6 +10877,7 @@ main {
   background-color: white;
   box-shadow: 0.5px 0.5px 0.8px hsla(21, 26%, 60%, 0.36), 1.6px 1.6px 2.5px -0.8px hsla(21, 26%, 60%, 0.36), 4px 4.1px 6.4px -1.7px hsla(21, 26%, 60%, 0.36), 9.6px 10px 15.6px -2.5px hsla(21, 26%, 60%, 0.36);
   align-items: center;
+  border-radius: 30px;
 }
 @media only screen and (min-width: 992px) {
   .image-select {
