@@ -8,11 +8,16 @@
 
 .collection-container header{
     display: flex;
+    flex-direction: column;
     align-items: baseline;
     gap: 1rem;
 
     h3 {
         font-size: 3rem;
+    }
+
+    @include mq.set-breakpoint("large") {
+        flex-direction: row; 
     }
 }
 

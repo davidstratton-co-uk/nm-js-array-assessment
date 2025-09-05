@@ -2,6 +2,11 @@
 
 main {
     display: grid;
-    padding: 1rem 2rem;
+    padding: 2rem .5rem;
     grid-template-rows: min-content min-content 1fr;
+
+    @include mq.set-breakpoint("large") {
+        padding: 2rem 2rem;
+    }
 }
+

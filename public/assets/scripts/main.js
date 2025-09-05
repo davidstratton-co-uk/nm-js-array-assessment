@@ -269,13 +269,12 @@ const switchUser = (userName) => {
  * 
  */
 const displayFormError = (errorMsg) => {
-    console.log(errorMsg);
 
     let p = document.createElement("p");
     p.textContent = errorMsg;
 
     formNewError.replaceChildren(p);
-    // replace if error is already there
+
 }
 
 /**
