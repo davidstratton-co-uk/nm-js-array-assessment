@@ -2,31 +2,26 @@
 
 .image-select {
     display: grid;
+    grid-template-rows: 40dvh min-content;
     justify-items: center;
     width: 85%;
     margin: auto;
     padding: 1rem;
-    gap: 2rem;
+    gap: 1rem;
     background-color: white;
     box-shadow:
     0.5px 0.5px 0.8px hsl(21deg 26% 60% / 0.36),
     1.6px 1.6px 2.5px -0.8px hsl(21deg 26% 60% / 0.36),
     4px 4.1px 6.4px -1.7px hsl(21deg 26% 60% / 0.36),
     9.6px 10px 15.6px -2.5px hsl(21deg 26% 60% / 0.36);
+    align-items: center;
 
+    @include mq.set-breakpoint("large") {
+        grid-template-rows: 40dvh min-content;
+    }
 }
 
 .image-current img{
+    max-height: 40dvh;
     width: 100%;
-    max-height: 300px;
-
-    @include mq.set-breakpoint("small") {
-        padding: 0 2rem;
-        max-height: 400px;
-    }
-
-    @include mq.set-breakpoint("large") {
-        padding: 0 2rem;
-        max-height: 500px;
-    }
 }

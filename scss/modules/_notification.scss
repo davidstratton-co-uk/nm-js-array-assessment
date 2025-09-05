@@ -1,5 +1,11 @@
 @use '../helpers/media-query' as mq;
 
+.notifications {
+    position: fixed;
+    top: 10px;
+    z-index: 100;
+}
+
 %notification {
     text-align: center;
     padding: 5px;
