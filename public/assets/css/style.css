@@ -10769,7 +10769,7 @@ dialog::backdrop {
   background-color: #f5dede;
   text-align: center;
 }
-.site-header h2 {
+.site-header h1 {
   word-break: break-word;
 }
 .site-header span {
@@ -11011,7 +11011,7 @@ main {
   align-items: baseline;
   gap: 1rem;
 }
-.collection-container header h3 {
+.collection-container header h2 {
   font-size: 3rem;
 }
 @media only screen and (min-width: 992px) {
